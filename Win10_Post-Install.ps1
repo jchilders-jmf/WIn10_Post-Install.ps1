@@ -1,10 +1,8 @@
 # Description: New PC BOXSTARTER Script
 # Author: Jon Childers
-# Last Updated: 5/14/19 3:
+# Last Updated: 5/14/19 3:18pm
 #
 # !!!!! Set "Set-ExecutionPolicy RemoteSigned" in an elevated shell before launchiing this script: 
-# 
-# Test comment 2 for pull request 5/14 1:32PM
 # 
 #This will self elevate the script so with a UAC prompt since this script needs to be run as an Administrator in order to function properly.
 If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]'Administrator')) {
