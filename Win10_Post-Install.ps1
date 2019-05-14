@@ -113,9 +113,6 @@ Get-AppxPackage Microsoft.People | Remove-AppxPackage
 # Phone
 Get-AppxPackage Microsoft.WindowsPhone | Remove-AppxPackage
 
-# Photos
-Get-AppxPackage Microsoft.Windows.Photos | Remove-AppxPackage
-
 # Plex
 Get-AppxPackage *Plex* | Remove-AppxPackage
 
@@ -128,17 +125,22 @@ Get-AppxPackage Microsoft.WindowsSoundRecorder | Remove-AppxPackage
 # Solitaire
 Get-AppxPackage *Solitaire* | Remove-AppxPackage
 
+# SpeedTest
+Get-AppxPackage Microsoft.NetworkSpeedTest | Remove-AppxPackage
+
 # Sticky Notes
 Get-AppxPackage Microsoft.MicrosoftStickyNotes | Remove-AppxPackage
 
 # Sway
-Get-AppxPackage Microsoft.Office.Sway | Remove-AppxPackage
+Get-AppxPackage Office.Sway | Remove-AppxPackage
 
 # Twitter
 Get-AppxPackage *Twitter* | Remove-AppxPackage
 
 # Xbox
 Get-AppxPackage Microsoft.XboxApp | Remove-AppxPackage
+Get-AppxPackage Microsoft.XboxGameOverlay | Remove-AppxPackage
+Get-AppxPackage Microsoft.XboxSpeechToTesxtOverlay | Remove-AppxPackage
 Get-AppxPackage Microsoft.XboxIdentityProvider | Remove-AppxPackage
 
 # Zune Music, Movies & TV
@@ -476,6 +478,36 @@ ForEach ($type in @("Paint.Picture", "giffile", "jpegfile", "pngfile")) {
     Set-ItemProperty -Path $("HKCR:\$type\shell\open") -Name "MuiVerb" -Type ExpandString -Value "@%ProgramFiles%\Windows Photo Viewer\photoviewer.dll,-3043"
     Set-ItemProperty -Path $("HKCR:\$type\shell\open\command") -Name "(Default)" -Type ExpandString -Value "%SystemRoot%\System32\rundll32.exe `"%ProgramFiles%\Windows Photo Viewer\PhotoViewer.dll`", ImageView_Fullscreen %1"
 }
+
+#Stops edge from taking over as the default .PDF viewer    
+    Write-Output "Stopping Edge from taking over as the default .PDF viewer"
+    $NoPDF = "HKCR:\.pdf"
+    $NoProgids = "HKCR:\.pdf\OpenWithProgids"
+    $NoWithList = "HKCR:\.pdf\OpenWithList" 
+    If (!(Get-ItemProperty $NoPDF  NoOpenWith)) {
+        New-ItemProperty $NoPDF NoOpenWith 
+    }        
+    If (!(Get-ItemProperty $NoPDF  NoStaticDefaultVerb)) {
+        New-ItemProperty $NoPDF  NoStaticDefaultVerb 
+    }        
+    If (!(Get-ItemProperty $NoProgids  NoOpenWith)) {
+        New-ItemProperty $NoProgids  NoOpenWith 
+    }        
+    If (!(Get-ItemProperty $NoProgids  NoStaticDefaultVerb)) {
+        New-ItemProperty $NoProgids  NoStaticDefaultVerb 
+    }        
+    If (!(Get-ItemProperty $NoWithList  NoOpenWith)) {
+        New-ItemProperty $NoWithList  NoOpenWith
+    }        
+    If (!(Get-ItemProperty $NoWithList  NoStaticDefaultVerb)) {
+        New-ItemProperty $NoWithList  NoStaticDefaultVerb 
+    }
+            
+    #Appends an underscore '_' to the Registry key for Edge
+    $Edge = "HKCR:\AppXd4nrz8ff68srnhf9t5a8sbjyar1cr723_"
+    If (Test-Path $Edge) {
+        Set-Item $Edge AppXd4nrz8ff68srnhf9t5a8sbjyar1cr723_ 
+    }
 
 # Calling all functions
 installthese
