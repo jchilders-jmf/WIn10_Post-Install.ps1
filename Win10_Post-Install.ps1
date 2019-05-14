@@ -1,11 +1,11 @@
 # Description: New PC BOXSTARTER Script
 # Author: Jon Childers
-# Last Updated: 5/14/19
+# Last Updated: 5/14/19 3:
 #
 # !!!!! Set "Set-ExecutionPolicy RemoteSigned" in an elevated shell before launchiing this script: 
 # 
 # Test comment 2 for pull request 5/14 1:32PM
-# Test 3:03
+# 
 #This will self elevate the script so with a UAC prompt since this script needs to be run as an Administrator in order to function properly.
 If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]'Administrator')) {
     Write-Host "You didn't run this script as an Administrator. This script will self elevate to run as an Administrator and continue."
@@ -433,6 +433,8 @@ function UnPin-App ( [string]$appname ) {
 	}
 }
 UnPin-App "Microsoft Edge"
+UnPin-App "Microsoft Store"
+UnPin-App "Mail"
 
 #Disable UAC though powershell
 $osversion = (Get-CimInstance Win32_OperatingSystem).Version
@@ -461,6 +463,21 @@ $path = 'HKU:\.DEFAULT\Control Panel\Keyboard\'
 $name = 'InitialKeyboardIndicators'
 $value = '2'
 Set-Itemproperty -Path $path -Name $name -Value $value
+
+# Hide Task View button
+Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "ShowTaskViewButton" -Type DWord -Value 0
+
+# Set Photo Viewer as default for bmp, gif, jpg and png
+Write-Host "Setting Photo Viewer as default for bmp, gif, jpg, png and tif..."
+If (!(Test-Path "HKCR:")) {
+    New-PSDrive -Name HKCR -PSProvider Registry -Root HKEY_CLASSES_ROOT | Out-Null
+}
+ForEach ($type in @("Paint.Picture", "giffile", "jpegfile", "pngfile")) {
+    New-Item -Path $("HKCR:\$type\shell\open") -Force | Out-Null
+    New-Item -Path $("HKCR:\$type\shell\open\command") | Out-Null
+    Set-ItemProperty -Path $("HKCR:\$type\shell\open") -Name "MuiVerb" -Type ExpandString -Value "@%ProgramFiles%\Windows Photo Viewer\photoviewer.dll,-3043"
+    Set-ItemProperty -Path $("HKCR:\$type\shell\open\command") -Name "(Default)" -Type ExpandString -Value "%SystemRoot%\System32\rundll32.exe `"%ProgramFiles%\Windows Photo Viewer\PhotoViewer.dll`", ImageView_Fullscreen %1"
+}
 
 # Calling all functions
 installthese
