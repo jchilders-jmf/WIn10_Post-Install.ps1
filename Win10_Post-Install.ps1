@@ -1,6 +1,8 @@
 # Description: New PC BOXSTARTER Script
-# Author: Jon Childers
-# Last Updated: 5/14/19 3:30pm
+# Author: Jon Childers & Chase Jones
+# Last Updated: 5/14/19 3:49pm
+# 
+# Need to add a scripts to hide taskview, and cortana from taskbar!!!!
 #
 # !!!!! Set "Set-ExecutionPolicy RemoteSigned" in an elevated shell before launchiing this script: 
 # 
