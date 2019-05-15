@@ -391,6 +391,9 @@ Function UnpinStart {
         % {$_.DoIt()}
 }
 
+# Remove Edge icon on desktop
+    New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "DisableEdgeDesktopShortcutCreation" -Value 1 -PropertyType DWORD -Force | Out-Null
+
 Function debloater {
 
 $Keys = @(
