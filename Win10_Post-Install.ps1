@@ -1,6 +1,6 @@
 # Description: Windows 10 Post Install Clean/Prep Script
 # Author: Jon Childers & Chase Jones
-# Last Updated: 5/15/19 9:45 am
+# Last Updated: 5/15/19 10:45 am
 # 
 # Need to add a scripts to hide taskview, and cortana from taskbar!!!!
 #
