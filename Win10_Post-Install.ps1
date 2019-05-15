@@ -1,8 +1,8 @@
-# Description: New PC BOXSTARTER Script
+# Description: Windows 10 Post Install Clean/Prep Script
 # Author: Jon Childers & Chase Jones
-# Last Updated: 5/14/19 3:49pm
+# Last Updated: 5/15/19 9:00 am
 # 
-# Need to add scripts to hide taskview, and cortana from taskbar!!!!
+# Need to add a scripts to hide taskview, and cortana from taskbar!!!!
 #
 # !!!!! Set "Set-ExecutionPolicy RemoteSigned" in an elevated shell before launchiing this script: 
 # 
@@ -359,6 +359,12 @@ Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer 
 # To Restore (Windows 10 Style Volume Control):
 # Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\MTCUVC" -Name EnableMtcUvc -Type DWord -Value 1
 
+#Remove 3D Objects folder from Windows Explorer
+REG DELETE "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}" /F
+REG DELETE "HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}" /F
+#To Restore
+#REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}" /F
+#REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}" /F
 
 }
 
