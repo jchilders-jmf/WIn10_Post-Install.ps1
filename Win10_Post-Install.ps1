@@ -1,8 +1,6 @@
 # Description: Windows 10 Post Install Clean/Prep Script
 # Author: Jon Childers & Chase Jones
-# Last Updated: 5/15/19 11:35 am
-# 
-# Need to add a scripts to hide taskview, and cortana from taskbar!!!!
+# Last Updated: 5/15/19 3:35 pm
 #
 # !!!!! Set "Set-ExecutionPolicy RemoteSigned" in an elevated shell before launchiing this script: 
 # 
@@ -100,6 +98,9 @@ Get-AppxPackage *Minecraft* | Remove-AppxPackage
 # Netflix
 Get-AppxPackage *Netflix* | Remove-AppxPackage
 
+#OfficeLens
+Get-AppxPackage "Microsoft.OfficeLens" | Remove-AppxPackage
+
 # Office Hub
 Get-AppxPackage Microsoft.MicrosoftOfficeHub | Remove-AppxPackage
 
@@ -134,10 +135,19 @@ Get-AppxPackage Microsoft.NetworkSpeedTest | Remove-AppxPackage
 Get-AppxPackage Microsoft.MicrosoftStickyNotes | Remove-AppxPackage
 
 # Sway
-Get-AppxPackage Office.Sway | Remove-AppxPackage
+Get-AppxPackage "Microsoft.Office.Sway" | Remove-AppxPackage
+
+#Todos
+Get-AppxPackage "Microsoft.Todos" | Remove-AppxPackage
 
 # Twitter
 Get-AppxPackage *Twitter* | Remove-AppxPackage
+
+#Wallet
+Get-AppxPackage "Microsoft.Wallet" | Remove-AppxPackage
+
+#Whiteboard
+Get-AppxPackage "Microsoft.Whiteboard" | Remove-AppxPackage
 
 # Xbox
 Get-AppxPackage Microsoft.XboxApp | Remove-AppxPackage
@@ -148,6 +158,50 @@ Get-AppxPackage Microsoft.XboxIdentityProvider | Remove-AppxPackage
 # Zune Music, Movies & TV
 Get-AppxPackage Microsoft.ZuneMusic | Remove-AppxPackage
 Get-AppxPackage Microsoft.ZuneVideo | Remove-AppxPackage
+
+#Uninstalling default third party applications
+Write-Output "Uninstalling default third party applications..."
+Get-AppxPackage "2414FC7A.Viber" | Remove-AppxPackage
+Get-AppxPackage "41038Axilesoft.ACGMediaPlayer" | Remove-AppxPackage
+Get-AppxPackage "46928bounde.EclipseManager" | Remove-AppxPackage
+Get-AppxPackage "4DF9E0F8.Netflix" | Remove-AppxPackage
+Get-AppxPackage "64885BlueEdge.OneCalendar" | Remove-AppxPackage
+Get-AppxPackage "7EE7776C.LinkedInforWindows" | Remove-AppxPackage
+Get-AppxPackage "828B5831.HiddenCityMysteryofShadows" | Remove-AppxPackage
+Get-AppxPackage "89006A2E.AutodeskSketchBook" | Remove-AppxPackage
+Get-AppxPackage "9E2F88E3.Twitter" | Remove-AppxPackage
+Get-AppxPackage "A278AB0D.DisneyMagicKingdoms" | Remove-AppxPackage
+Get-AppxPackage "A278AB0D.MarchofEmpires" | Remove-AppxPackage
+Get-AppxPackage "ActiproSoftwareLLC.562882FEEB491" | Remove-AppxPackage
+Get-AppxPackage "AD2F1837.HPJumpStart" | Remove-AppxPackage
+Get-AppxPackage "AdobeSystemsIncorporated.AdobePhotoshopExpress" | Remove-AppxPackage
+Get-AppxPackage "Amazon.com.Amazon" | Remove-AppxPackage
+Get-AppxPackage "C27EB4BA.DropboxOEM" | Remove-AppxPackage
+Get-AppxPackage "CAF9E577.Plex" | Remove-AppxPackage
+Get-AppxPackage "CyberLinkCorp.hs.PowerMediaPlayer14forHPConsumerPC" | Remove-AppxPackage
+Get-AppxPackage "D52A8D61.FarmVille2CountryEscape" | Remove-AppxPackage
+Get-AppxPackage "D5EA27B7.Duolingo-LearnLanguagesforFree" | Remove-AppxPackage
+Get-AppxPackage "DB6EA5DB.CyberLinkMediaSuiteEssentials" | Remove-AppxPackage
+Get-AppxPackage "DolbyLaboratories.DolbyAccess" | Remove-AppxPackage
+Get-AppxPackage "Drawboard.DrawboardPDF" | Remove-AppxPackage
+Get-AppxPackage "E046963F.LenovoCompanion" | Remove-AppxPackage
+Get-AppxPackage "Facebook.Facebook" | Remove-AppxPackage
+Get-AppxPackage "Fitbit.FitbitCoach" | Remove-AppxPackage
+Get-AppxPackage "flaregamesGmbH.RoyalRevolt2" | Remove-AppxPackage
+Get-AppxPackage "GAMELOFTSA.Asphalt8Airborne" | Remove-AppxPackage
+Get-AppxPackage "KeeperSecurityInc.Keeper" | Remove-AppxPackage
+Get-AppxPackage "king.com.BubbleWitch3Saga" | Remove-AppxPackage
+Get-AppxPackage "king.com.CandyCrushSodaSaga" | Remove-AppxPackage
+Get-AppxPackage "LenovoCorporation.LenovoID" | Remove-AppxPackage
+Get-AppxPackage "LenovoCorporation.LenovoSettings" | Remove-AppxPackage
+Get-AppxPackage "PandoraMediaInc.29680B314EFC2" | Remove-AppxPackage
+Get-AppxPackage "PricelinePartnerNetwork.Booking.comBigsavingsonhot" | Remove-AppxPackage
+Get-AppxPackage "SpotifyAB.SpotifyMusic" | Remove-AppxPackage
+Get-AppxPackage "WinZipComputing.WinZipUniversal" | Remove-AppxPackage
+Get-AppxPackage "XINGAG.XING" | Remove-AppxPackage
+Get-AppxPackage "king.com.CandyCrushSaga" | Remove-AppxPackage
+Get-AppxPackage "Nordcurrent.CookingFever" | Remove-AppxPackage
+Get-AppxPackage "A278AB0D.DragonManiaLegends" | Remove-AppxPackage
 
 # Uninstall McAfee Security App (Not sure about the need for this)
 	<# $mcafee = gci "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall" | foreach { gp $_.PSPath } | ? { $_ -match "McAfee Security" } | select UninstallString
@@ -403,7 +457,7 @@ Function UnpinStart {
 }
 
 # Remove Edge icon on desktop
-    New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "DisableEdgeDesktopShortcutCreation" -Value 1 -PropertyType DWORD -Force | Out-Null
+New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "DisableEdgeDesktopShortcutCreation" -Type DWORD -Value 1 
 
 Function debloater {
 
