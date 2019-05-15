@@ -673,7 +673,6 @@ protectprivacy
 betterpreferences
 debloater
 UnpinStart
-installJava
 
 #Start Cleanup
 dism /online /Cleanup-Image /StartComponentCleanup
