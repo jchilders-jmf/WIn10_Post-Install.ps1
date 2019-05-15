@@ -1,6 +1,6 @@
 # Description: Windows 10 Post Install Clean/Prep Script
 # Author: Jon Childers & Chase Jones
-# Last Updated: 5/15/19 9:00 am
+# Last Updated: 5/15/19 9:45 am
 # 
 # Need to add a scripts to hide taskview, and cortana from taskbar!!!!
 #
@@ -313,6 +313,9 @@ $People = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\Peo
     }
 Set-ItemProperty $People  PeopleBand -Value 0 
 
+# Hide Task View button
+Write-Host "Hiding Task View button..."
+Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "ShowTaskViewButton" -Type DWord -Value 0
 
 # Start Menu: Disable Bing Search Results
 Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search -Name BingSearchEnabled -Type DWord -Value 0
