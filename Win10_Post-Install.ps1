@@ -638,3 +638,6 @@ protectprivacy
 betterpreferences
 debloater
 UnpinStart
+
+#Start Cleanup
+dism /online /Cleanup-Image /StartComponentCleanup
