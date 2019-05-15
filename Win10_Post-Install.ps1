@@ -520,44 +520,6 @@ If (!(Test-Path $registryOEM)) {
 	Set-ItemProperty $registryOEM  SystemPaneSuggestionsEnabled -Value 0   	
 }
 
-Function installJava {
-
-# Download and silent install Java Runtime Environement
-
-# working directory path
-$workd = "c:\temp"
-
-# Check if work directory exists if not create it
-If (!(Test-Path -Path $workd -PathType Container))
-{ 
-New-Item -Path $workd  -ItemType directory 
-}
-
-#create config file for silent install
-$text = '
-INSTALL_SILENT=Enable
-AUTO_UPDATE=Enable
-SPONSORS=Disable
-REMOVEOUTOFDATEJRES=1
-'
-$text | Set-Content "$workd\jreinstall.cfg"
-    
-#download executable, this is the small online installer
-$source = "https://javadl.oracle.com/webapps/download/AutoDL?BundleId=238698_478a62b7d4e34b78b671c754eaaf38ab"
-$destination = "$workd\jreInstall.exe"
-$client = New-Object System.Net.WebClient
-$client.DownloadFile($source, $destination)
-
-#install silently
-Start-Process -FilePath "$workd\jreInstall.exe" -ArgumentList INSTALLCFG="$workd\jreinstall.cfg"
-
-# Wait 120 Seconds for the installation to finish
-Start-Sleep -s 180
-
-# Remove the installer
-rm -Force $workd\jre*﻿
-}
-
 # Change Explorer home screen back to "This PC"
 Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name LaunchTo -Type DWord -Value 1
 # Change it back to "Quick Access" (Windows 10 default)
@@ -668,6 +630,41 @@ ForEach ($type in @("Paint.Picture", "giffile", "jpegfile", "pngfile")) {
     If (Test-Path $Edge) {
         Set-Item $Edge AppXd4nrz8ff68srnhf9t5a8sbjyar1cr723_ 
     }
+    
+# Download and silent install Java Runtime Environement
+
+# working directory path
+$workd = "c:\temp"
+
+# Check if work directory exists if not create it
+If (!(Test-Path -Path $workd -PathType Container))
+{ 
+New-Item -Path $workd  -ItemType directory 
+}
+
+#create config file for silent install
+$text = '
+INSTALL_SILENT=Enable
+AUTO_UPDATE=Enable
+SPONSORS=Disable
+REMOVEOUTOFDATEJRES=1
+'
+$text | Set-Content "$workd\jreinstall.cfg"
+    
+#download executable, this is the small online installer
+$source = "https://javadl.oracle.com/webapps/download/AutoDL?BundleId=238698_478a62b7d4e34b78b671c754eaaf38ab"
+$destination = "$workd\jreInstall.exe"
+$client = New-Object System.Net.WebClient
+$client.DownloadFile($source, $destination)
+
+#install silently
+Start-Process -FilePath "$workd\jreInstall.exe" -ArgumentList INSTALLCFG="$workd\jreinstall.cfg"
+
+# Wait 120 Seconds for the installation to finish
+Start-Sleep -s 180
+
+# Remove the installer
+rm -Force $workd\jre*
 
 # Calling all functions
 installthese
