@@ -1,6 +1,6 @@
 # Description: Windows 10 Post Install Clean/Prep Script
 # Author: Jon Childers & Chase Jones
-# Last Updated: 5/15/19 10:45 am
+# Last Updated: 5/15/19 11:35 am
 # 
 # Need to add a scripts to hide taskview, and cortana from taskbar!!!!
 #
@@ -316,6 +316,10 @@ Set-ItemProperty $People  PeopleBand -Value 0
 # Hide Task View button
 Write-Host "Hiding Task View button..."
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "ShowTaskViewButton" -Type DWord -Value 0
+
+# Hide Fun Facts on Lockscreen
+Write-Host "Hiding Fun Facts on Lockscreen..."
+Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "RotatingLockScreenOverlayEnabled" -Type DWord -Value 0
 
 # Hide Search button / box
 Write-Host "Hiding Search Box / Button..."
