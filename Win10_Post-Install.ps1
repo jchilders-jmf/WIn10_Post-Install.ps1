@@ -26,7 +26,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.We
 
 Function installthese {
 #--- Install Apps ---
-choco install googlechrome -y
+# choco install googlechrome
 # choco install microsoft-teams
 # 
 }
