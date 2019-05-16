@@ -26,7 +26,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.We
 
 Function installthese {
 #--- Install Apps ---
-# choco install googlechrome
+choco install googlechrome
 # choco install microsoft-teams
 # 
 }
@@ -661,7 +661,7 @@ $client.DownloadFile($source, $destination)
 Start-Process -FilePath "$workd\jreInstall.exe" -ArgumentList INSTALLCFG="$workd\jreinstall.cfg"
 
 # Wait 120 Seconds for the installation to finish
-Start-Sleep -s 180
+Start-Sleep -s 90
 
 # Remove the installer
 rm -Force $workd\jre*
