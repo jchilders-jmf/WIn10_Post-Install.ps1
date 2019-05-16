@@ -660,19 +660,26 @@ $client.DownloadFile($source, $destination)
 #install silently
 Start-Process -FilePath "$workd\jreInstall.exe" -ArgumentList INSTALLCFG="$workd\jreinstall.cfg"
 
-# Wait 120 Seconds for the installation to finish
-Start-Sleep -s 90
+# Wait 60 Seconds for the installation to finish
+Start-Sleep -s 60
 
 # Remove the installer
 rm -Force $workd\jre*
 
 # Calling all functions
 installthese
+Start-Sleep -s 5
 removethese
+Start-Sleep -s 5
 protectprivacy
+Start-Sleep -s 5
 betterpreferences
+Start-Sleep -s 5
 debloater
+Start-Sleep -s 5
 UnpinStart
 
 #Start Cleanup
 dism /online /Cleanup-Image /StartComponentCleanup
+
+Restart-Computer
