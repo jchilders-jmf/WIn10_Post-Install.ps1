@@ -1,6 +1,6 @@
 # Description: Windows 10 Post Install Clean/Prep Script
 # Author: Jon Childers & Chase Jones
-# Last Updated: 5/17/19 1:30 pm
+# Last Updated: 5/17/19 1:50 pm
 #
 # !!!!! Set "Set-ExecutionPolicy RemoteSigned" in an elevated shell before launchiing this script: 
 # 
@@ -22,7 +22,10 @@ choco feature enable -n allowGlobalConfirmation
 Function InstallThese {
     #--- Install Apps ---
     choco install googlechrome
+    choco install flashplayerplugin
     # choco install microsoft-teams
+    # choco install 7zip.install
+    # choco install notepadplusplus.install
     # 
     }
 
