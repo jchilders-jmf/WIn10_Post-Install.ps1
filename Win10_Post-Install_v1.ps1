@@ -429,6 +429,7 @@ Function Debloater {
     }
 
 # Download and silent install Java Runtime Environement
+    Write-Output "Installing Java Runtime Environement"
     # working directory path
     $workd = "c:\temp"
 
