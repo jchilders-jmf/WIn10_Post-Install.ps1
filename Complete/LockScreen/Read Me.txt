@@ -1,0 +1,4 @@
+1. Open PowerShell as Administrator
+2. Change working path to this location
+3. Run the following command:
+.\Set-LockScreenImage.ps1 -State "Custom"
