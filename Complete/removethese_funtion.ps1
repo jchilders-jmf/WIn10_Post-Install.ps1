@@ -116,4 +116,4 @@ Function removethese {
     # Zune Music, Movies & TV
         Get-AppxPackage Microsoft.ZuneMusic | Remove-AppxPackage
         Get-AppxPackage Microsoft.ZuneVideo | Remove-AppxPackage
-}
+    }
