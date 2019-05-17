@@ -1,4 +1,4 @@
-Function protectprivacy {
+Function ProtectPrivacy {
 
     #Disables Windows Feedback Experience
     Write-Output "Disabling Windows Feedback Experience program"
@@ -90,4 +90,4 @@ Function protectprivacy {
         New-Item $LocationConfig
     }
     Set-ItemProperty $LocationConfig Status -Value 0
-}
+    }
