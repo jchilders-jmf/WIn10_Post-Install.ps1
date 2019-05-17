@@ -56,12 +56,21 @@ Function RemoveThese {
 
     # Candy Crush
     Get-AppxPackage king.com.CandyCrush* | Remove-AppxPackage
+    Get-AppxPackage king.com.CandyCrushSaga | Remove-AppxPackage
+    Get-AppxPackage king.com.CandyCrushSodaSaga | Remove-AppxPackage
+    Get-AppxPackage king.com.BubbleWitch3Saga | Remove-AppxPackage
 
     # Comms Phone
     Get-AppxPackage Microsoft.CommsPhone | Remove-AppxPackage
 
     # Dell
     Get-AppxPackage *Dell* | Remove-AppxPackage
+
+    # DolbyAccess
+    Get-AppxPackage DolbyLaboratories.DolbyAccess | Remove-AppxPackage
+
+    # DrawboardPDF
+    Get-AppxPackage Drawboard.DrawboardPDF | Remove-AppxPackage
 
     # Dropbox
     Get-AppxPackage *Dropbox* | Remove-AppxPackage
@@ -71,6 +80,9 @@ Function RemoveThese {
 
     # Feedback Hub
     Get-AppxPackage Microsoft.WindowsFeedbackHub | Remove-AppxPackage
+    
+    # Flipboard
+    Get-AppxPackage Flipboard.Flipboard | Remove-AppxPackage
 
     # Get Started
     Get-AppxPackage Microsoft.Getstarted | Remove-AppxPackage
@@ -120,6 +132,9 @@ Function RemoveThese {
     # Plex
     Get-AppxPackage *Plex* | Remove-AppxPackage
 
+    # RoyalRevolt2
+    Get-AppxPackage flaregamesGmbH.RoyalRevolt2 | Remove-AppxPackage
+
     # Skype (Metro version)
     Get-AppxPackage Microsoft.SkypeApp | Remove-AppxPackage
 
@@ -138,7 +153,7 @@ Function RemoveThese {
     # Sway
     Get-AppxPackage Microsoft.Office.Sway | Remove-AppxPackage
 
-    #Todos
+    # Todos
     Get-AppxPackage Microsoft.Todos | Remove-AppxPackage
 
     # Twitter
